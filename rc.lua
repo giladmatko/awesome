@@ -1,9 +1,10 @@
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
--- Widget and layout library
+-- Widget and lyout library
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -251,6 +252,9 @@ globalkeys = awful.util.table.join(
             end
         end),
 
+    -- Copy to clip
+    awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
+    
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
