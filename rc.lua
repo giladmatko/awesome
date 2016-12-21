@@ -132,6 +132,14 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
+-- memory ussage
+
+memwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(memwidget, vicious.widgets.mem, " $1 ($2MB/$3MB) $8GB", 13)
+
+
+
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -211,6 +219,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(memwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
