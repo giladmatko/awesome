@@ -6,11 +6,15 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 -- Widget and lyout library
 local wibox = require("wibox")
+ vicious = require("vicious")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+
+local lain = require("lain")
+
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -43,7 +47,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
-
+beautiful.useless_gap_width=10;
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -60,7 +64,8 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.tile,
+    lain.layout.uselessfair,
+    awful.layout.suit.tile,	
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
@@ -71,7 +76,8 @@ local layouts =
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
-    awful.layout.suit.floating
+    awful.layout.suit.floating,
+    lain.layout.uselesstile
 }
 -- }}}
 
@@ -82,6 +88,14 @@ local layouts =
 --    end
 -- end
 -- }}}
+
+theme.lain_icons         = os.getenv("HOME") ..
+                           "/.config/awesome/lain/icons/layout/default/"	
+ theme.layout_termfair    = theme.lain_icons .. "termfairw.png"
+ theme.layout_termfair    = theme.lain_icons .. "termfairw.png"	
+ theme.layout_cascade     = theme.lain_icons .. "cascadew.png"
+ theme.layout_cascadetile = theme.lain_icons .. "cascadetilew.png"
+ theme.layout_centerwork  = theme.lain_icons .. "centerworkw.png"
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
