@@ -280,6 +280,14 @@ globalkeys = awful.util.table.join(
     
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+
+    --screen shots
+    awful.key({ modkey, "Shift"   }, "3"     , function () awful.util.spawn("shutter -f -e")  end),
+    awful.key({ modkey, "Shift"   }, "4"     , function () awful.util.spawn("shutter -s -e")  end),
+
+    --lock screen 
+    awful.key({ modkey, "Control" }, "#119", function () awful.util.spawn("xautolock -locknow") end),
+    
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
