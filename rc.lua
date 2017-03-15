@@ -65,6 +65,7 @@ modkey = "Mod4"
 local layouts =
 {
     lain.layout.uselessfair,
+    lain.layout.uselessfair.horizontal,
     awful.layout.suit.tile,	
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -89,14 +90,14 @@ local layouts =
 -- end
 -- }}}
 
-theme.lain_icons         = os.getenv("HOME") ..
-                           "/.config/awesome/lain/icons/layout/default/"	
+ theme.lain_icons         = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/default/"	
  theme.layout_termfair    = theme.lain_icons .. "termfairw.png"
  theme.layout_termfair    = theme.lain_icons .. "termfairw.png"	
  theme.layout_cascade     = theme.lain_icons .. "cascadew.png"
  theme.layout_cascadetile = theme.lain_icons .. "cascadetilew.png"
  theme.layout_centerwork  = theme.lain_icons .. "centerworkw.png"
-
+ theme.layout_uselesstile = theme.lain_icons .. "tile.png"
+ theme.layout_uselessfair = theme.lain_icons .. "termfair.png"
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -274,7 +275,9 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-
+    awful.key({ modkey, "Control" }, "Tab", function() awful.menu.clients({
+                                                      theme = { width = 250 }
+                                                  }) end), 
     -- Copy to clip
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
     
@@ -282,11 +285,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
 
     --screen shots
-    awful.key({ modkey, "Shift"   }, "3"     , function () awful.util.spawn("shutter -f -e")  end),
-    awful.key({ modkey, "Shift"   }, "4"     , function () awful.util.spawn("shutter -s -e")  end),
+    awful.key({ modkey, "Shift", "Control"   }, "3"     , function () awful.util.spawn("shutter -f ")  end),
+    awful.key({ modkey, "Shift", "Control"   }, "4"     , function () awful.util.spawn("shutter -s ")  end),
 
     --lock screen 
-    awful.key({ modkey, "Control" }, "#119", function () awful.util.spawn("xautolock -locknow") end),
+    awful.key({ modkey, "Control" }, "#119", function ()
+	  awful.util.spawn("~/bin/locker.sh")
+	  awful.util.spawn("xautolock -locknow")
+    end),
     
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
